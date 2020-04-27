@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <button id="btnMinus">-</button>
+    <span id="spNum">0</span>
+    <button id="btnAdd">+</button>
+    <script>
+      //DOM4步骤
+      //1.查找触发事件的元素
+      //本例中：先点击+按钮
+      $("#btnAdd")
+        //2.绑定事件处理函数
+        .click(function () {
+          //3.查找要修改的元素
+          //本例中：查找当前按钮兄弟中的元素span元素
+          let $span = $(this).siblings("span");
+          //4.修改找到的元素
+          //获取span的内容，转为整数
+          let n = parseInt($span.html());
+          n++;
+          //再把n值放回去
+          $span.html(n);
+        });
+
+      $("#btnMinus")
+        //2.绑定事件处理函数
+        .click(function () {
+          //3.查找要修改的元素
+          //本例中：查找当前按钮兄弟中的元素span元素
+          let $span = $(this).siblings("span");
+          //4.修改找到的元素
+          //获取span的内容，转为整数
+          let n = parseInt($span.html());
+          //只有n>0时，才能-1
+          n > 0 && n--;
+          //再把n值放回去
+          $span.html(n);
+        });
+    </script>
+  </body>
+</html>

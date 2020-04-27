@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn1">clicn me(0)</button>
+  <script>
+  //只要涉及交互: DOM 4步:
+  //1. 查找触发事件的元素
+  var btn1=document.getElementById("btn1");
+  //2. 绑定事件处理函数
+  btn1.onclick=function(){
+    //3. 查找要修改的元素
+    var btn=this;
+    //4. 修改元素
+    var n=parseInt(
+      btn.innerHTML.slice(9,-1)
+    );
+    n++;
+    btn.innerHTML=`click me(${n})`;
+  }
+  </script>
+</body>
+</html>

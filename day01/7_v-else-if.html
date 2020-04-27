@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>空气净化器</h1>
+    <h2>{{pm25}}</h2>
+    <img v-if="pm25<100" src="img/1.png">
+    <img v-else-if="pm25<200" src="img/2.png">
+    <img v-else-if="pm25<300"src="img/3.png">
+    <img v-else src="img/4.png">
+  </div>
+  <script>
+    var vm=new Vue({
+      el:"#app",
+      data:{
+        pm25:180
+      }
+    });
+    setInterval(function(){
+    //vm.data.pm25=
+      vm.pm25=Math.random()*400
+    },2000)
+  </script>
+</body>
+</html>
