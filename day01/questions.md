@@ -1,3 +1,4 @@
+```
 1. Error compiling template:
 答: HTML模板中语法写错了
 2. Interpolation inside attributes has been removed. Use v-bind or the colon shorthand instead. For example, instead of <div id="{{ val }}">, use <div :id="val">.
@@ -25,3 +26,4 @@
 	但是（却）引入了←在加载过程中，
 	Make sure that this property is reactive, either in the data option
 	请确认这个属性是响应式的而且在data参数中
+```
