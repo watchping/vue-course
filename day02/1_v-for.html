@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <!--本例中: 因为要反复生成多个li，所以v-for要写在li上，而不是li的父元素ul上-->
+        <li v-for="(value,i) of teachers" :key="i">
+          第{{i+1}}阶段: {{value}}
+        </li>
+      </ul>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          teachers: ["亮亮", "然然", "东东", "涛涛"],
+        },
+      });
+    </script>
+  </body>
+</html>

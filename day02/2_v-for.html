@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!--希望遍历data中一个对象的每个属性，反复生成多个相同结构的HTML元素-->
+      <ul>
+        <li v-for="(value,key) of ym" :key="key">{{key}} : {{value}}</li>
+      </ul>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          ym: {
+            math: 89,
+            chs: 69,
+            eng: 91,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
