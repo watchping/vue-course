@@ -1,0 +1,42 @@
+<head>
+    <metacharset="UTF-8">
+        <metaname="viewport"content="width=device-width, initial-scale=1.0">
+            <metahttp-equiv="X-UA-Compatible"content="ie=edge">
+                <title>Document</title>
+                <style>
+                    ul {
+                        list-style: none
+                    }
+
+                    ul>li {
+                        float: left;
+                        border: 1pxsolid#555;
+                        width: 36px;
+                        height: 36px;
+                        line-height: 36px;
+                        text-align: center;
+                    }
+
+                    ul>li+li {
+                        border-left: 0
+                    }
+                </style>
+                <scriptsrc="js /vue.js">
+                    </script>
+</head>
+
+<body>
+    <divid="app">
+        <ul>
+            <liv-for="i of pageCount">{{i}}</li>
+        </ul>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    pageCount: 3
+                }
+            })
+        </script>
+</body>

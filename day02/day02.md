@@ -60,9 +60,9 @@ v-for还可:
     el:"#app",
     data:{
         ym:{
-        math:89,
-        chs:69,
-        eng:91
+            math:89,
+            chs:69,
+            eng:91
         }
     }
     })
@@ -76,40 +76,45 @@ v-for还会数数: 给v-for一个数字，他可以生成从1开始依次递增�
 示例: 根据页数，生成指定个数的分页按钮
 ```javascript
 <head>
-<metacharset="UTF-8">
-<metaname="viewport"content="width=device-width, initial-scale=1.0">
-<metahttp-equiv="X-UA-Compatible"content="ie=edge">
-<title>Document</title>
-<style>
-ul{ list-style:none }
-ul>li{
-float:left;
-border:1pxsolid#555;
-width:36px;
-height:36px;
-line-height:36px;
-text-align:center;
-  }
-ul>li+li{
-border-left:0
-  }
-</style>
-<scriptsrc="js/vue.js"></script>
+    <metacharset="UTF-8">
+        <metaname="viewport"content="width=device-width, initial-scale=1.0">
+            <metahttp-equiv="X-UA-Compatible"content="ie=edge">
+                <title>Document</title>
+                <style>
+                    ul {
+                        list-style: none
+                    }
+
+                    ul>li {
+                        float: left;
+                        border: 1pxsolid#555;
+                        width: 36px;
+                        height: 36px;
+                        line-height: 36px;
+                        text-align: center;
+                    }
+
+                    ul>li+li {
+                        border-left: 0
+                    }
+                </style>
+                <script src="js/vue.js"></script>
 </head>
+
 <body>
-<divid="app">
-<ul>
-<liv-for="i of pageCount">{{i}}</li>
-</ul>
-</div>
-<script>
-var vm=new Vue({
-  el:"#app",
-  data:{
-    pageCount:3
-  }
-})
-</script>
+    <div id="app">
+        <ul>
+            <li v-for="i of pageCount">{{i}}</li>
+        </ul>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    pageCount: 3
+                }
+            })
+        </script>
 </body>
 ```
 
