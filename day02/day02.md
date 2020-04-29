@@ -6,9 +6,8 @@
 5. 计算属性
 6. 过滤器
 
-### 一. 指令v-for
-反复生成多个相同结构的HTML元素
-
+### 1. 指令v-for
+功能：反复生成多个相同结构的HTML元素
 用法：
 ` <要反复生成的元素 v-for="(value, i) of 数组">`
 
@@ -28,9 +27,8 @@
 ```javascript
 <div id="app">
 <ul>
-	<!--本例中: 因为要反复生成多个li，所以v-for要写在li上，而不是li的父元素ul上-->
-	<li v-for="(value,i) of teachers":key ="i">第{{i+1}}阶段: {{value}}
-	</li>
+   <!--本例中: 因为要反复生成多个li，所以v-for要写在li上，而不是li的父元素ul上-->
+   <li v-for="(value,i) of teachers":key ="i">第{{i+1}}阶段: {{value}}</li>
 </ul>
 </div>
 <script>
@@ -77,28 +75,28 @@ v-for还会数数: 给v-for一个数字，他可以生成从1开始依次递增�
 ```javascript
 <head>
     <metacharset="UTF-8">
-        <metaname="viewport"content="width=device-width, initial-scale=1.0">
-            <metahttp-equiv="X-UA-Compatible"content="ie=edge">
-                <title>Document</title>
-                <style>
-                    ul {
-                        list-style: none
-                    }
+    <metaname="viewport"content="width=device-width, initial-scale=1.0">
+    <metahttp-equiv="X-UA-Compatible"content="ie=edge">
+    <title>Document</title>
+    <style>
+    ul {
+        list-style: none
+    }
 
-                    ul>li {
-                        float: left;
-                        border: 1pxsolid#555;
-                        width: 36px;
-                        height: 36px;
-                        line-height: 36px;
-                        text-align: center;
-                    }
+    ul>li {
+        float: left;
+        border: 1pxsolid#555;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+    }
 
-                    ul>li+li {
-                        border-left: 0
-                    }
-                </style>
-                <script src="js/vue.js"></script>
+    ul>li+li {
+        border-left: 0
+    }
+    </style>
+    <script src="js/vue.js"></script>
 </head>
 
 <body>
@@ -123,7 +121,7 @@ v-for还会数数: 给v-for一个数字，他可以生成从1开始依次递增�
 比如: `this.teachers[0]="燕儿" `
 页面上是不会变的！因为数组中的数字类型的下标012...无法添加访问器属性，也就不受监控！
 解决:
-今后，vue中修改数组中的元素值！必须用数组家函数！才能自动更新页面。因为函数都是受监控的。
+今后，vue中修改数组中的元素值！必须用数组及函数！才能自动更新页面。因为函数都是受监控的。
 比如: `this.teachers.splice(0,1,"燕儿")`
     删除0位置的1个元素，再在0位置放入"燕儿"
 结果: 页面会自动变化！
