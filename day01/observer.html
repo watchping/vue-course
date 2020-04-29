@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+//观测者（observer)模式：变量值修改，所有关注的人都能自动得到通知，并收到信的值
+//保存数据的对象
+let data={
+    n:0,//外人项随时获得的变量，保存着外人关心的一个数据n
+    observers:[],//用一个数组保存将来关心这个变量n的所有外人，这些关心觊觎这个变量n的外人，也称为观测者
+
+    getState(){
+        return this.state;
+    },
+    setState(state){
+        this.setState=state;
+        this.notifAllObserver();
+    },
+    attach(observer){
+        this.observers.push(observer);
+    },
+
+    //定义一个函数，专门获取变量n的值
+    getN(){
+        return this.n ;
+    },
+
+    //定义一个函数，专门修改变量n的值
+    setN(n){
+        this.n = n;
+        //任何时候修改了变量n的值，都可以通知所有关心n的外人；
+        this.notifAllObserver();
+    },
+
+    //定义一个函数，专门将关心变量n的外人（观测者）对象，集中保存在data中的observer数组中，便于集中通知。
+    addObs(observer){
+        this.observers.pub(observer)
+    },
+
+    //定义一个函数，专门用于通知当前data中的observers数组中保存的关心变量n的外人们,n发生变化了。
+    notifAllObservers(){
+        //遍历observers数组中的每个外人对象
+        this.observers.forEach(observer=>{
+            observer.getNewN();//update();
+        })
+    }
+}
+
+//观察者，等待被触发
+class Observer{
+    constructor(name,subject){
+        this.name=name;
+        this.subject=subject;
+        this.subject.attach(this);
+    }
+    update(){
+        console.log(`${this.name} update,state:${this.subject.getState()}`)
+    }
+}
+
+//向data的observers数组中添加3个关心变量n的外人（观察者）对象
+for(let i=0;i<3;i++){
+    data.addObs({
+        //每个外人对象都包含2个属性和1个函数
+        name:`obs${1}`,//外人的名字
+        look:data,  //每个外人都关心的data对象中的变量，都紧紧盯着data对象
+        //每个外人都有的1个函数
+        getNewN:function(){  //update
+           console.log(`${this.name} known that n is updated to ${this.data.n}`) ;
+        }
+    });
+}
+
+//测试代码
+// let s = new Subject();
+// let o1= new Observer("o1",s);
+// let o2= new Observer("o2",s);
+// let o3= new Observer("o3",s);
+
+console.log("data将n改为1时：");
+data.setN(1);
+console.log("data将n改为2时：");
+data.setN(2);
+console.log("data将n改为3时：");
+data.setN(3);
+</script>
+
+</body>
+</html>

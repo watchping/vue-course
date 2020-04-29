@@ -9,18 +9,20 @@
   </head>
   <body>
     <div id="app">
-      <h1>消息来源:{{html}}</h1>
-      <h1 v-html="'消息来源:'+html">
-        Welcome
-      </h1>
+      <h1>当前系统时间: {{time}}</h1>
+      <!--希望上线时间只在首次打开网页时绑定一次，之后，即使time变量值发生变化，也不会自动更新上线时间-->
+      <h1 v-once>上线时间: {{time}}</h1>
     </div>
     <script>
       var vm = new Vue({
         el: "#app",
         data: {
-          html: `<p>来自<a href="javascript:;">&lt;&lt;新华社&gt;&gt;</a>的消息</p>`,
+          time: new Date().toLocaleString(),
         },
       });
+      setInterval(function () {
+        vm.time = new Date().toLocaleString();
+      }, 1000);
     </script>
   </body>
 </html>

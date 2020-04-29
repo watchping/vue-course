@@ -9,16 +9,20 @@
   </head>
   <body>
     <div id="app">
-      <h1>消息来源:{{html}}</h1>
-      <h1 v-html="'消息来源:'+html">
-        Welcome
-      </h1>
+      <select v-model="orderStatus">
+        <option value="0">未付款</option>
+        <option value="10">已付款</option>
+        <option value="20">已发货</option>
+        <option value="30">已签收</option>
+      </select>
+      <h1>orderStatus:{{orderStatus}}</h1>
     </div>
     <script>
       var vm = new Vue({
         el: "#app",
         data: {
-          html: `<p>来自<a href="javascript:;">&lt;&lt;新华社&gt;&gt;</a>的消息</p>`,
+          //0:未付款  10:已付款  20:已发货 30:已签收
+          orderStatus: 10,
         },
       });
     </script>

@@ -9,16 +9,29 @@
   </head>
   <body>
     <div id="app">
-      <h1>消息来源:{{html}}</h1>
-      <h1 v-html="'消息来源:'+html">
-        Welcome
-      </h1>
+      <label
+        ><input
+          type="radio"
+          name="sex"
+          value="1"
+          v-model:checked="sex"
+        />男</label
+      >
+      <label
+        ><input
+          type="radio"
+          name="sex"
+          value="0"
+          v-model:checked="sex"
+        />女</label
+      >
+      <h1>sex:{{sex}}</h1>
     </div>
     <script>
       var vm = new Vue({
         el: "#app",
         data: {
-          html: `<p>来自<a href="javascript:;">&lt;&lt;新华社&gt;&gt;</a>的消息</p>`,
+          sex: 1,
         },
       });
     </script>

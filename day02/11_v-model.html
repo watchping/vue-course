@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!--在文本框上按回车可以查找-->
+      <input type="text" v-model:value="keywords" @keyup="myKeyUp" />
+      <!--点击按钮可以查找-->
+      <button @click="search">百度一下</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          keywords: "macbook i5",
+        },
+        methods: {
+          search() {
+            console.log(`查找 ${this.keywords} 相关的内容...`);
+          },
+          // $event
+          //   ↓
+          myKeyUp(e) {
+            //只有按回车才查找
+            if (e.keyCode == 13) {
+              //调用旁边的search()函数
+              this.search();
+            }
+          },
+        },
+        //想变量keywords只要被更改，就重新执行一次搜索
+        watch: {
+          keywords() {
+            console.log("自动调用一次watch中的keywords函数...");
+            this.search();
+          },
+        }, //进入new Vue()中的一切data:{}, methods:{}, watch:{}都会被打散，最终都直接隶属于new VUe()对象，都是平级的，所以可以this.方式，互访。
+      });
+    </script>
+  </body>
+</html>

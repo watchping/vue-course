@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 300px;
+        height: 100px;
+        margin: 20px;
+      }
+      #d1 {
+        background-color: #aaf;
+      }
+      #d2 {
+        background-color: #ffa;
+      }
+    </style>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="d1" @click="doit">d1</div>
+      <div id="d2">d2</div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          doit(e) {
+            //同DOM的e
+            console.log(`点在d1的: x:${e.offsetX},y:${e.offsetY}`);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

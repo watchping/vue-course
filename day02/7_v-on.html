@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!--0. 先引入vue.js-->
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="change(-1)">-</button>
+      <span>{{n}}</span>
+      <button @click="change(+1)">+</button>
+    </div>
+    <script>
+      var data = { n: 0 };
+      var vm = new Vue({
+        el: "#app",
+        data: data,
+        methods: {
+          //本例中，因为页面上只需要一个change函数，所以methods中只添加一个change函数
+          //但是页面上调用change()函数时，传入了一个参数值,所以定义change函数时需要定义一个形参来接住实参值
+          change(i) {
+            //如果i==+1,说明本次想+1
+            if (i == +1) {
+              this.n++;
+            } else {
+              //否则如果i!=+1，说明本次想-1
+              //只有n>0时，才能-1
+              if (this.n > 0) {
+                this.n--;
+              }
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

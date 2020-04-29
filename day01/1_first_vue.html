@@ -32,11 +32,11 @@
     let data = { n: 0 };
     //3.创建一个Vue类型的子对象，将数据对象data和页面元素区域div#app绑定起来！
     new Vue({
+      // ：左边标识符el、data、methods等都不能随便改名
       el: "#app", //找到HTML中id为app的区域
       data: data,//将数据对象包含进Vue对象中来
 
       //将页面上需要的事件函数都要写在methods的成员中
-
       methods: {
         //本例中只有2个方法：add、minus
         //在事件处理函数中，只要专心处理数据即可，Vue会自动保持内容同步
