@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script>
+      //定义一个新的过滤器专门为性别添加图标
+      Vue.filter("sexIcon", function (oldVal) {
+        //oldVal可能有六种：1  0  男  女   Male   Female
+        if (oldVal == 1 || oldVal == 0) {
+          return oldVal == 1 ? "♂" : "♀";
+        } else {
+          return oldVal == "男" || oldVal == "Male"
+            ? oldVal + "♂"
+            : oldVal + "♀";
+        }
+      });
+      //sexFilter=function(){ ... }
+      Vue.filter("sexFilter", function (oldVal, language) {
+        //性别接住的旧值可能是1或0
+        //language参数可能接住cn或en,其中，默认是cn
+        if (language == "en") {
+          return oldVal == 1 ? "Male" : "Female";
+        } else {
+          return oldVal == 1 ? "男" : "女";
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>性别: {{sex | sexFilter | sexIcon }}</h1>
+      <h1>性别: {{sex | sexFilter("en") | sexIcon }}</h1>
+      <h1>性别: {{sex | sexIcon }}</h1>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          sex: 1,
+        },
+      });
+    </script>
+  </body>
+</html>

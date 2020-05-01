@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div
+        id="pop"
+        style="
+          position: fixed;
+          width: 100px;
+          height: 100px;
+          background-color: pink;
+        "
+        :style="{top, left}"
+      ></div>
+      <!--自动翻译为: top:0px; left:0px;-->
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          top: "0px",
+          left: "0px",
+        },
+      });
+      window.onkeydown = function (e) {
+        //左: 37  上: 38  右: 39  下: 40
+        if (e.keyCode == 39) {
+          //右
+          var left = parseInt(vm.left);
+          left += 20;
+          vm.left = left + "px";
+        } else if (e.keyCode == 40) {
+          //下
+          var top = parseInt(vm.top);
+          top += 20;
+          vm.top = top + "px";
+        } else if (e.keyCode == 38) {
+          //上
+          var top = parseInt(vm.top);
+          top -= 20;
+          vm.top = top + "px";
+        } else if (e.keyCode == 37) {
+          //左
+          var left = parseInt(vm.left);
+          left -= 20;
+          vm.left = left + "px";
+        }
+      };
+    </script>
+  </body>
+</html>

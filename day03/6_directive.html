@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script>
+      Vue.directive("focus", {
+        inserted(domElem) {
+          //inserted:function(domElem){
+          //让当前元素自动获得焦点
+          domElem.focus();
+          //DOM原生
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <div id="app"><input type="text" v-focus /><button>百度一下</button></div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {},
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>总计: ¥{{total.toFixed(2)}}</h3>
+      <ul>
+        <li v-for="(item,i) of cart" :key="i">
+          {{item.pid}} | {{item.pname}} | ¥{{item.price.toFixed(2)}} |
+          {{item.count}} —— 小计：¥{{(item.price*item.count).toFixed(2)}}
+        </li>
+      </ul>
+      <h3>总计: ¥{{total.toFixed(2)}}</h3>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          cart: [
+            { pid: 1, pname: "华为", price: 4455, count: 2 },
+            { pid: 2, pname: "小米", price: 3455, count: 1 },
+            { pid: 3, pname: "OPPO", price: 3356, count: 3 },
+          ],
+        },
+        methods: {
+          //叫方法，所以用法同方法的用法——必须加()
+        },
+        computed: {
+          //叫属性，所以用法同属性的用法——一定不要不加()
+          total() {
+            console.log("调用了一次total()");
+            var sum = 0;
+            for (var p of this.cart) {
+              sum += p.price * p.count;
+            }
+            return sum;
+          },
+        },
+      });
+      //测试: 在F12->console->vm.cart[1].count++
+    </script>
+  </body>
+</html>

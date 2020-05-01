@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+  <style>
+    /* 定义提示框的基础样式 */
+    .msg{
+      display:inline-block;
+      width:160px;
+      height:25px;
+      border:1px solid #555;
+      text-align:center;
+      line-height:25px;
+    }
+    /* 定义提示框在验证通过时的样式 */
+    .success{
+      border:1px solid green;
+      background-color:lightgreen;
+      color:green
+    }
+    /* 定义提示框在验证失败时的样式 */
+    .fail{
+      border:1px solid red;
+      background-color:pink;
+      color:red
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- 因为要获得用户输入的手机号进行验证，所有必须用双向绑定 -->
+  <input type="text" v-model="phone">
+  <!-- 因为提示框的样式可能在success和fail之间来回切换，所以动态绑定span的部分class
+    又因为提示框的内容也可能随验证结果而动态变化，所以也要绑定一个变量msg-->
+  <span class="msg" :class="msgClass">{{msg}}</span>
+  <!--界面中共需要三个变量-->
+</div>
+<script>
+var vm=new Vue({
+  el:"#app",
+  data:{
+    //因为页面中需要三个变量，所以data中就要有三个变量
+    phone:"", //实时接用户在文本框中输入的手机号
+    msg:"", //根据验证结果的对错，绑定提示信息的内容
+    //根据验证结果的对错，动态在success和fail两个class之间来回切换。
+    msgClass:{
+      success:false,
+      fail:false
+    }
+  },
+  watch:{
+    //因为用户一边输入，vue就一边验证，所以必须用watch随时监控用于的输入变化。
+    phone(){
+      //定义正则验证phone的内容
+      var reg=/^1[3-9]\d{9}$/;
+      //如果用正则验证phone的内容通过
+      if(reg.test(this.phone)==true){
+        //就修改msgClass应用成功的样式，不应用失败的样式
+        this.msgClass={
+          success:true,
+          fail:false
+        }
+        //修改span的提示信息内容
+        this.msg="手机号格式正确！"
+      }else{//否则如果验证失败
+        //就修改msgClass应用失败的样式，不应用成功的样式
+        this.msgClass={
+          success:false,
+          fail:true
+        }
+        //修改span的提示信息内容
+        this.msg="手机号格式正确！"
+      }
+    }
+  }
+})
+</script>
+</body>
+</html>

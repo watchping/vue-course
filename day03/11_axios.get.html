@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/axios.min.js">
+    //axios={ 
+    //  get(){ ... },
+    //  post(){ ... }
+    //}
+  </script>
+  <script src="js/qs.min.js">
+    //专门就将对象语法转为查询字符串语法
+    //{ uname:"dingding", upwd:"123456"}
+    // ↓ Qs.stringify(对象) 
+    //"uname=dingding&upwd=123456"
+  </script>
+</head>
+<body>
+  <script>
+  //先定义所有接口统一的服务器端域名部分
+  axios.defaults.baseURL="http://xzserver.applinzi.com"
+  //向服务器端请求学子商城首页商品数组，包含6个商品对象的信息
+  axios.get("/index")
+      .then(res=>{
+        console.log(res.data);
+      })
+  //想获取5号商品的详细信息: 要求: 携带一个lid参数，值为要查询的商品编号
+  axios.get("/details",{
+    params:{lid:5}
+  }).then(res=>{
+    console.log(res.data) //返回5号商品的详细信息
+  })
+  //用用户名dingding，密码123456，调用登录接口
+  axios.post("/users/signin",
+    //"uname=dingding&upwd=123456"
+    Qs.stringify({ uname:"dingding", upwd:"123456"})
+  ).then(res=>{
+    console.log(res.data);
+  })
+  </script>
+</body>
+</html>
