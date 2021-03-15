@@ -10,6 +10,13 @@
 <body>
   <div id="app">
     <h1>空气净化器</h1>
+    <!--
+      希望img的src属性值随变量pm25的值变化
+      如果pm25<100,src变为1.png
+      否则如果pm25<200,src变为2.png
+      否则如果pm25<300,src变为3.png
+      否则src变为4.png
+    -->
     <h2>{{pm25}}</h2>
     <img v-if="pm25<100" src="img/1.png">
     <img v-else-if="pm25<200" src="img/2.png">
@@ -23,6 +30,8 @@
         pm25:180
       }
     });
+
+    //随机改变pm25变量的值
     setInterval(function(){
     //vm.data.pm25=
       vm.pm25=Math.random()*400
