@@ -1,16 +1,18 @@
 # 正课:
+```
 一. 绑定样式
 二. 自定义指令
 三. 计算属性
-
+```
 
 ## 一.绑定样式
-
+```
 1.绑定内联样式
 不好的做法: 将元素的整个style属性当做一个字符串来绑定
     <元素 style="固定不变的css属性":style="变量">
     data:{
-        变量:"可能变化的css属性" //比如: "top:50px; left:100px"
+        变量:"可能变化的css属性"
+        //比如: "top:50px; left:100px"
     }
 	缺点: 不便于修改其中某一个css属性。
 
@@ -28,7 +30,9 @@
     }
 
     :style动态绑定的变量中的css属性，经过编译为字符串后，自动和不带:的固定不变的style中的css属性最终合并为一个style属性。
+```
 示例: 用键盘上下左右方向键控制一个小方块的移动
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -89,8 +93,10 @@
     </script>
   </body>
 </html>
-
-方法2：为每个动态变化的css属性都创建一个变量（创建多个变量）,绑定时，""中使用匿名对象:style="{css属性: 变量1, css属性:变量2 }"
+```
+方法2：为每个动态变化的css属性都创建一个变量（创建多个变量）
+```
+绑定时，""中使用匿名对象:style="{css属性: 变量1, css属性:变量2 }"
 	<元素 style="固定不变的css属性":style="{css属性1: 变量1, css属性2: 变量2, ...}">
     data:{
         变量1: 值1,
@@ -98,7 +104,9 @@
     }
 结果: :style="{css属性1: 变量1, css属性2: 变量2, ...}"，会被自动翻译为:
     style="css属性1:变量1的值; css属性2: 变量2的值"，再和其他写死的不带:的style合并
+```
 示例: 用键盘上下左右方向键控制一个小方块的移动:
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -157,9 +165,10 @@
     </script>
   </body>
 </html>
-
+```
 
 2. 绑定class
+```
 style绑定内联样式的问题:
     多数样式的修改，都是同时修改多个css属性，如果用style绑定，每个css属性都要写出来，代码繁琐！
 解决:
@@ -178,7 +187,9 @@ style绑定内联样式的问题:
             }
     }
 结果1: 编译时，仅将变量对象中值为true的class，编译进最终的class中，值为false的class，不包含在最终的正式class字符串中。且动态绑定的:class会和不带:绑定的固定不变的class，合并为一个class！
+```
 示例1: 验证手机号格式（参见day03/3_class.html)
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -215,8 +226,7 @@ style绑定内联样式的问题:
 <div id="app">
   <!-- 因为要获得用户输入的手机号进行验证，所有必须用双向绑定 -->
   <input type="text" v-model="phone">
-  <!-- 因为提示框的样式可能在success和fail之间来回切换，所以动态绑定span的部分class
-    又因为提示框的内容也可能随验证结果而动态变化，所以也要绑定一个变量msg-->
+  <!-- 因为提示框的样式可能在success和fail之间来回切换，所以动态绑定span的部分class又因为提示框的内容也可能随验证结果而动态变化，所以也要绑定一个变量msg-->
   <span class="msg" :class="msgClass">{{msg}}</span>
   <!--界面中共需要三个变量-->
 </div>
@@ -262,9 +272,10 @@ var vm=new Vue({
 </script>
 </body>
 </html>
-
+```
 
 方法2. 为每个class都声明一个变量，在绑定时，可用{}对象语法绑定
+```
 语法2：
     <元素 class="固定不变的class":class="{class1: 变量1, class2: 变量2, ...}"
     data:{
@@ -272,7 +283,9 @@ var vm=new Vue({
         变量2: true或false
     }
 结果2: 编译时，仅将:class="{}"中值为true的class，编译进最终的class中，值为false的class，不包含在最终的正式class字符串中。且动态绑定的:class会和不带:绑定的固定不变的class，合并为一个class！
+```
 示例2: 验证手机号格式（参见day03/4_class2.html)
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -355,9 +368,10 @@ var vm=new Vue({
     </script>
   </body>
 </html>
-
+```
 示例3: 验证手机号格式（参见day03/5_class3.html)
 优化: 尽量减少vue中data中的变量，便于维护。
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -427,9 +441,10 @@ var vm=new Vue({
     </script>
   </body>
 </html>
-
+```
 
 ## 二. 自定义指令:
+```
 功能:向Vue大家庭中添加自定义指令
 语法：
 	Vue.directive("指令名", {//向Vue大家庭中添加一个新的指令，并制定指令名
@@ -452,7 +467,9 @@ var vm=new Vue({
         向Vue大家庭中添加一个新的自定义指令，关联一个处理函数
 	(2). new Vue()时，会扫描<div id="app">下的所有内容。
 	(3). 每扫描到一个v-开头的指令属性，就会回Vue大家庭中找是否有对应的指令。如果有对应的指令，就调用指令关联的处理函数，对指令所在的元素执行原生DOM操作。
+```
 示例: 让文本框自动获得焦点（参考代码day03/6_directive.html）
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -482,6 +499,7 @@ var vm=new Vue({
     </script>
   </body>
 </html>
+```
 强调: new Vue()起到最重要的扫描HTML内容的作用，只有new Vue()才认识v-开头的指令，所有，即使data中没有值，只要用到了Vue相关的功能，new Vue()都不能省略！
 
 ## 三. 计算属性：
@@ -492,6 +510,7 @@ var vm=new Vue({
 3. 什么时候用计算属性:
     今后，只要一个属性的值可以根据其他属性计算出来，都没必要保存！
 4. 如何使用计算属性:
+```
     (1). 定义计算属性:
 	new Vue({
 		el:"#app",
@@ -511,20 +530,29 @@ var vm=new Vue({
 		}
     })
 	(2). 使用计算属性: 计算属性，虽然本质是一个函数，但是在HTML中绑定语法中使用时，不要加()!
+  ```
 5. 结果：
+```
 	(1). 只要计算属性所依赖的另一个属性值发生改变，同样会通知计算属性重新计算新的属性值。
 	(2). 计算属性计算出的结果，会被Vue缓存起来，反复使用，避免重复计算。即使反复使用多次，也只在首次计算一次。
+```
 6. 比较: methods vs computed
+```
 	(1). 用法:
 	a. methods必须加()
 	b. computed 不用加()
 	(2). 反复使用:
 	a. methods中的方法，每调用一次，就会重新执行一次，执行结果，不会被vue缓存起来。
 	b. computed中的计算属性，只在第一次使用时计算一次，然后，结算结果，就会被Vue缓存起来，即使在别的地方反复使用这个计算属性，也不会重复计算，而是直接从缓存中获取值。但是，当所依赖的其他属性值发生变化时，计算才被迫重新计算一次。
+```
 7. 如何选择methods和computed:
+```
 	(1). 如果这次使用时，更关心函数的执行结果数据时，首选计算属性
 	(2). 如果这次使用时，更关心函数执行操作的过程，结果数据无所谓，甚至函数没有返回值，则首选methods中的方法。
+```
 8. 示例: 使用计算属性绑定购物车总价(参考代码day03/7_computed.html)
+
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -574,8 +602,9 @@ var vm=new Vue({
     </script>
   </body>
 </html>
-
+```
 ## 四. 过滤器:
+```
 1. 什么是: 专门对变量的原始值进行加工后，再显示的特殊函数
 2. 为什么: 个别变量的原始值不能直接给人看！
     比如:性别0和1、日期的毫秒数
@@ -595,8 +624,9 @@ var vm=new Vue({
 		定义一个过滤器函数，加入到Vue大家庭中备用
 	(2). 当new Vue()扫描到{{}}中的|时，会回Vue大家庭中查找相应名称的过滤器函数。
 	(3). 只要找到，就先将|前的变量原始值，交给过滤器函数的oldVal参数，经过过滤器函数的加工，返回新值。显示到当前绑定语法的位置。
-
+```
 7. 示例:过滤性别的1和0为男和女(参考代码day03/8_filter.html)
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -627,8 +657,9 @@ var vm=new Vue({
     </script>
   </body>
 </html>
-
+```
 8. 过滤器可以加参数:
+```
 	(1). 定义过滤器时:
 	Vue.filter("过滤器名",function(oldVal, 自定义形参, ...){
 		Return 新值
@@ -636,6 +667,8 @@ var vm=new Vue({
 	(2). 使用过滤器时:
 	{{变量 | 过滤器名(自定义实参, ...)}}
 	(3). 示例: 根据参数值返回不同语言的性别(代码参考day03/9_filter2.html)
+```
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -672,13 +705,16 @@ var vm=new Vue({
     </script>
   </body>
 </html>
-
+```
 9. 过滤器可以连用:
+```
  	(1). 绑定语法中: {{变量 | 过滤器1 |过滤器2|... }}
 	(2). 强调:
 	a. 后一个过滤器2，进入的旧值，已经不是变量的原始值了，而是前一个过滤器加工后的中间值。
 	b. 只有最后一个过滤器的返回值，才会显示到页面上。如果希望前几个过滤器的返回值也能一起显示到页面上，只能在最后一个过滤器中将新值拼接到上一步过滤器传入的旧值上。
 	(3). 示例：为性别再额外添加图标(参考代码day03/9_filter3.html)
+```
+```JavaScript
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -727,8 +763,9 @@ var vm=new Vue({
     </script>
   </body>
 </html>
-
+```
 ## 五. axios:
+```
 1. 什么是axios: 基于Promise的专门发送ajax请求的函数库
 2. 为什么: 总结发送ajax请求:
 	(1). xhr4步/6步
@@ -759,6 +796,8 @@ var vm=new Vue({
         res.data是服务器端返回的结果
       })
 	(5). 示例: 使用axios向学子商城项目的接口地址发送get和post请求，传参，并接受响应结果（参考代码day03/11_axios.get_xz.html)
+  ```
+  ```JavaScript
   <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -813,3 +852,4 @@ var vm=new Vue({
     </script>
   </body>
 </html>
+```

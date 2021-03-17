@@ -36,7 +36,7 @@
       <input type="text" v-model="phone" />
       <!-- 因为提示框的样式可能在success和fail之间来回切换，所以动态绑定span的部分class
       又因为提示框的内容也可能随验证结果而动态变化，所以也要绑定一个变量msg-->
-      <!--                            class名:变量-->
+      <!--class名:变量-->
       <!-- <span class="msg" :class="{success:success, fail:fail}">{{msg}}</span> -->
       <!--结果: 哪个class名后的变量值为true，才会进入最终的class字符串中。变量值为false的class，不会出现在最终的class字符串中-->
       <!-- <span class="msg" :class="{success:isRight, fail:isRight==false}">{{isRight==true?"手机号可用":"手机号格式错误！"}}</span> -->
