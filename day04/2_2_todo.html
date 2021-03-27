@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <todo></todo>
+    </div>
+    <script>
+      //========================================================================
+      //该版本的todo实现是讲待办项数组放在todoList组件中的，不是放在todo组件中。
+      //关键点：属性绑定传参、bus事件及调用
+      //========================================================================
+      //定义子组件
+      var todoAdd = {
+        template: `
+          <div>
+            <input type="text" v-model="item"/>
+            <button @click="add_item">+</button>
+          </div>`,
+        data() {
+          return { item: "" };
+        },
+        methods: {
+          add_item() {
+            this.bus.$emit("add_item", this.item); //触发兄弟组件在事件bus中注册的自定义事件add_item
+            this.item="";
+          },
+        },
+      };
+
+      //定义子组件（其实是孙组件了）
+      var todoItem = {
+        template: `<li>
+          <!--从爹给的口袋里获得的数据，可在孩子里用于绑定语法中，就像用自己data中的数据一样方便-->
+          {{i+1}} - {{task}} <button @click="del">x</button>
+        </li>`,
+        //孩子todoItem组件，可从爹给的两个口袋task和i中取出爹给的两个值:任务名和任务序号。
+        props: ["task", "i"],
+        methods: {
+          del() {
+            this.$emit("del_item", this.i); //触发父组件的自定义事件,并传参
+          },
+        },
+      };
+
+      //定义子组件
+      var todoList = {
+        template: `<ul>
+          <!--如果当前todoList的子组件todoItem中继续需要todoList中的数据，也可通过:绑定语法，由当前组件放入子组件上的自定义属性中。可以放进多个自定义属性中，像多个口袋一样-->
+          <!--比如：todo-item子组件主要当前组件遍历出的任务名task和任务序号i，所以在todo-item上添加两个自定义属性，绑定task和i变量的值-->
+          <!--子组件todoList自定义事件del_item（被孙组件todoItem删除待办项时通过$emit调用），其中事件处理函数是del-->
+          <todo-item v-for="(task,i) of tasks" :task="task" :i="i" :key="i" @del_item="del"></todo-item>
+        </ul>`,
+        data() {
+          return {
+            tasks: ["吃饭", "睡觉", "打亮亮", "学习"], //待办事项数组放在子组件todoList里
+          };
+        },
+        components: {
+          todoItem,
+        },
+        methods: {
+          del: function (i) {
+            this.tasks.splice(i, 1);
+          },
+          add(str) {
+            this.tasks.push(str);
+          },
+        },
+        created() {
+          this.bus.$on("add_item", this.add.bind(this)); //在事件bus里注册自定义事件add_item
+        },
+      };
+
+      //定义父组件，全局注册
+      Vue.component("todo", {
+        template: `<div>
+          <h1>待办事项列表</h1>
+          <todo-add></todo-add>
+          <todo-list></todo-list>
+        </div>`,
+
+        components: {
+          todoAdd,
+          todoList,
+          //vue会自动将驼峰命名的组件对象名，翻译为-分割
+          //     ↓         ↓
+          //<todo-add> <todo-list>
+        }, //表示今后todoAdd和todoList只能在todo内使用
+      });
+
+      var bus = new Vue({});//定义事件bus
+      Vue.prototype.bus = bus;
+      var vm = new Vue({
+        el: "#app",
+        data: {},
+      });
+    </script>
+  </body>
+</html>

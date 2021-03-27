@@ -6,10 +6,11 @@ var todoAdd={
   data(){
     return {item:""}
   },
-  props:["tasks"],
+  props:["tasks"],//接受父组件的传值
   methods:{
     add_item(){
-      this.bus.$emit("add_item", this.item);
+      this.$emit("add_item", this.item);//触发父组件自定义事件add_item。并传参
+      this.item = "";
     }
   }
 }

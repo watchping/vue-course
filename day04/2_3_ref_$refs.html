@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <parent></parent>
+</div>
+<script>
+  var child = {
+  template: `<div><p>{{item}}</p>
+    <p><button @click="study">Cal Study</button></p>
+    </div>`,
+  data() {
+    return { item: "child item" };
+  },
+  methods: {
+    study() {
+      console.log("子组件的方法被调用了");
+
+      console.log(this.$parent.item); //访问父组件的数据
+      this.$parent.speak(); //调用父组件的方法
+    },
+  },
+};
+
+var parent = {
+  template: `<div>
+      <child ref="myChild">{{item}}</child>
+      <p><button @click="callchild">call child</button></p>
+    </div>`,
+  data() {
+    return { item: "parent item" };
+  },
+
+  methods: {
+    speak() {
+      console.log("父组件的方法被调用了");
+
+      console.log(this.$refs.myChild.item); //访问子组件myChild的数据
+
+    },
+    callchild(){
+      this.$refs.myChild.study(); //访问子组件myChild的方法
+    }
+  },
+  components:{
+    child
+  }
+};
+
+
+var vm=new Vue({
+  el:"#app",
+  data:{
+  },
+  components:{
+    parent
+  }
+})
+</script>
+</body>
+</html>

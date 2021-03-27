@@ -1,6 +1,6 @@
 正课:
 1. VUE脚手架
-2. 使用VUE脚手架开发学子商城项目
+2. 使用VUE脚手架开发学子商城项目(源码参见.\xzvue)
 3. VUE组件生命周期:
 
 ### VUE脚手架（9:12开始
@@ -22,22 +22,20 @@
 	安装之后: 输入vue -V 看到版本号就算成功
 
 - (2).用生成脚手架代码的工具为本次项目创建一套脚手架代码结构: (请老母鸡下一个蛋)
+```
+a. 在想要生成项目的目录，地址栏里写cmd，打开命令行
 
-9:38 暂停 学生准备环境  10:10
+b. 在命令行中输入vue create xzvue
 
-	a. 在想要生成项目的目录，地址栏里写cmd，打开命令行
-
-	b. 在命令行中输入vue create xzvue
-
-	c. Your connection to the default npm registry seems to be slow.(你现在的链接是链接到默认的国外的npm仓库，看起来有些慢),Use https://registry.npm.taobao.org for faster installation? (Y/n)(是否使用国内的淘宝镜像来更快速安装输入Y按回车)
-    d. ? Please pick a preset:请选择一个预置的设置
+c. Your connection to the default npm registry seems to be slow.(你现在的链接是链接到默认的国外的npm仓库，看起来有些慢),Use https://registry.npm.taobao.org for faster installation? (Y/n)(是否使用国内的淘宝镜像来更快速安装输入Y按回车)
+d. ? Please pick a preset:请选择一个预置的设置
 		default (babel, eslint)//使用默认设置
 	   >Manually select features  //手动选择功能 按方向键下
 
        选第二个，手动选择功能，按回车
 
-	e. ? Check the features needed for your project: (Press <space> to select, <a> to toggle all 选择你的项目需要的功能（按空格选中或取消选中，按a全选所有）<i>to invert selection)
-```
+e. ? Check the features needed for your project: (Press <space> to select, <a> to toggle all 选择你的项目需要的功能（按空格选中或取消选中，按a全选所有）<i>to invert selection)
+
 (*) Babel将浏览器不认识的ES6甚至更高版本的js代码，翻译为ES5版本的js
 ( ) TypeScript
 ( ) Progressive Web App (PWA) Support
@@ -49,8 +47,8 @@
 ( ) E2E Testing
 
 按方向键上下移动，移动到想要选中的功能上，按空格键选中Babel、Router、Vuex，取消选中Linter
-```
-	f. Use history mode for router? (Requires proper server setup for index fallback in production) (Y/n)输入n 按回车
+
+f. Use history mode for router? (Requires proper server setup for index fallback in production) (Y/n)输入n 按回车
 
 	是否使用history模式作为路由器的标识（生产环境中需要配置首页重定向才能使用）
 
@@ -64,7 +62,7 @@
 	但是，http://localhost:5500/details/2我们本来想在客户端路由切换页面组件，但是浏览器也会发送给服务器端查找，因为服务器端没有这个资源，所以，很可能报错！
 	所以，将来，要么就用默认#/相对路径方式，要么可用histroy,必须同时请服务器端修改配置！
 
-	g. Where do you prefer placing config for Babel, ESLint, etc.? (Use arrow keys)
+g. Where do you prefer placing config for Babel, ESLint, etc.? (Use arrow keys)
 
     你想把本次的配置保存在哪个位置？（用方向键选择）
 
@@ -72,50 +70,50 @@
 	>In package.json  //将所有配置集中放在一个package.json文件中
 
     按方向键下，选in package.json，按回车
-	h. Save this as a preset for future projects? (y/N)
+h. Save this as a preset for future projects? (y/N)
 	是否保存这次的配置为将来项目的预定义配置
 	输入N，按回车
-	i. 看到结果: 说明用脚手架工具生成项目源代码结构成功
+i. 看到结果: 说明用脚手架工具生成项目源代码结构成功
 		...
 		Successfully created project xzvue.
 	👉  Get started with the following commands:
 
 		$ cd xzvue
 		$ npm run serve
-	j. 在windows资源管理器中，进入当前文件家，就看到为这次项目生成的半成品项目源代码文件夹xzvue。（老母鸡为这次项目下的蛋）
-	k. 将来，每做一个新项目，这套a-h的步骤都要重新操作一遍。
-	l. 其实刚创建完的脚手架项目源代码包含示例网页:
+j. 在windows资源管理器中，进入当前文件家，就看到为这次项目生成的半成品项目源代码文件夹xzvue。（老母鸡为这次项目下的蛋）
+k. 将来，每做一个新项目，这套a-h的步骤都要重新操作一遍。
+	其实刚创建完的脚手架项目源代码包含示例网页:
 	用vscode打开刚创建的脚手架项目文件夹
 	右键点击项目中的package.json文件，选在终端/命令行中打开
 	在弹出的命令行窗口中，输入npm run serve
-		Npm run serve: 做了两件事:
+	Npm run serve: 做了两件事:
 		编译脚手架项目代码为浏览器认识的ES5代码
 		同时启动简易开发服务器运行网站中网页
 	打开浏览器，在地址栏中输入: http://localhost:8080，可看到示例网页
 	或在命令行窗口中，按ctrl点连接地址: http://localhost:8080，也可查看示例网页
 	强调: 从此live server 退出历史舞台！不再使用live server运行！
-		所有vue项目都用npm run serve运行
-
+	所有vue项目都用npm run serve运行
+```
 (3). 为脚手架添加axios模块:
 ```
-	a. 在脚手架生成的项目文件夹内，比如: 这里是xzvue文件夹内
+a. 在脚手架生成的项目文件夹内，比如: 这里是xzvue文件夹内
 	在地址栏输入cmd，打开命令行
-	b. 本地安装axios模块:
+b. 本地安装axios模块:
 		npm i -save axios
-	c. 在脚手架项目源代码的src/main.js中，new Vue()前引入axios模块
+c. 在脚手架项目源代码的src/main.js中，new Vue()前引入axios模块
 	import axios from "axios" //node_modules中安装的模块，引入时都不用加路径
-	d. 设置axios对象的基础路径属性:
+d. 设置axios对象的基础路径属性:
 	axios.defaults.baseURL="http://服务器端域名"
 	比如: 学子商城项目中: axios.dafaults.baseURL="http://xzserver.applinzi.com"
-	e. 将axios对象放入Vue的原型对象中
+e. 将axios对象放入Vue的原型对象中
 	Vue.prototype.axios=axios;
-	f. 结果: 因为所有组件对象都是Vue类型的子对象，所以在所有组件内，任何位置都可用this.axios.get()和this.axios.post()访问Vue.prototype中的axios对象里的函数。
+f. 结果: 因为所有组件对象都是Vue类型的子对象，所以在所有组件内，任何位置都可用this.axios.get()和this.axios.post()访问Vue.prototype中的axios对象里的函数。
 ```
 5. 脚手架项目结构:
 ```
-	(1). .git文件夹(隐藏): 本地git仓库文件夹，如果git不熟，可以删掉。
-	(2). node_modules文件夹: 保存脚手架项目运行的依赖包。
-	(3). public文件夹:
+(1). .git文件夹(隐藏): 本地git仓库文件夹，如果git不熟，可以删掉。
+(2). node_modules文件夹: 保存脚手架项目运行的依赖包。
+(3). public文件夹:
 	a. 保存着整个单页面应用唯一完整的index.html文件
 	b. 将来还可能保存所有页面都需要的公共的css文件和js文件，比如:
 		bootstrap.css    jquery.js     bootstrap.js
@@ -124,7 +122,7 @@
 		3). 在唯一完整的index.html，顶部引入所有页面所需的第三方的css和js
 	c. 将来网页中用的所有图片，也都应该保存在public下！
 		所以，拷贝旧项目中的img文件夹到public下
-	(4). src文件夹:放所有我们自己编写的HTML，css和js
+(4). src文件夹:放所有我们自己编写的HTML，css和js
 	a. 根组件: 原SPA中唯一完整的页面的HTML和new Vue()不再放在一个.html文件里，而是分为两个文件了:
 		1). App.vue 只放根组件<div id="app">的HTML内容和根组件的css样式
 		2). main.js中放根组件new Vue({})以及对new Vue()的配置
@@ -162,22 +160,22 @@
 6.其实: 脚手架代码的结构和SPA应用代码的结构本质是相同的。用已知释新知。
 
 	(1). 回顾: SPA代码结构:
- s
+
 	(2). 脚手架代码结构: 其实就是SPA的代码结构
 
 
 7.es6模块化开发在脚手架中的应用
 ```
-	(1). 旧SPA应用中的引入问题: 所有组件对象都要先集中引入到Index.html中，再以全局对象方式使用。如果单看某一个组件对象文件，根本看不出依赖关系。——不直观
+(1). 旧SPA应用中的引入问题: 所有组件对象都要先集中引入到Index.html中，再以全局对象方式使用。如果单看某一个组件对象文件，根本看不出依赖关系。——不直观
 
-	(2). 每个.vue文件和.js文件，默认都是一个模块对象
-	(3). 每个模块对象都可向外抛出自己内部的成员，供外部访问
+(2). 每个.vue文件和.js文件，默认都是一个模块对象
+(3). 每个模块对象都可向外抛出自己内部的成员，供外部访问
 	export default {
 	要抛出的组件对象的内容
 	}
-	(4). 一个模块想使用另一个模块的内容时，无需经过第三方，即可直接找到模块文件引入其中的内容。
+(4). 一个模块想使用另一个模块的内容时，无需经过第三方，即可直接找到模块文件引入其中的内容。
 	import变量名from "目标文件的相对路径"
-	(5). 结果: 就可把目标文件中抛出的内容，引入自己文件内，像使用自己的变量和对象一样，使用其他文件模块中的内容。——减少中间商赚差价！
+(5). 结果: 就可把目标文件中抛出的内容，引入自己文件内，像使用自己的变量和对象一样，使用其他文件模块中的内容。——减少中间商赚差价！
  ```
 
 二. 用VUE脚手架开发学子商城项目:
@@ -200,13 +198,13 @@
 
 
 4. 全局组件的使用-页头组件-让所有页面都有页头
-	(1). 在src/components/文件下
+(1). 在src/components/文件下
 		新建一个普通的组件.vue文件，同样包含三部分
 		<template>内包含组件的HTML片段
 		<script>内包含组件的vue js代码
 		<style>内包含组件的css代码
 
-	(2). 在main.js中，在new Vue()前
+(2). 在main.js中，在new Vue()前
 	a. 找到全局组件文件所在的位置，将全局组件的内容以模块对象方式引入到main.js中备用
 		import 组件名 from "./components/组件名.vue"
 		比如: 想引入页头组件:
@@ -224,22 +222,19 @@
 			<router-view/>
 		</div>
 
-
-//==================节开始
-
 5. 子组件的使用-轮播图的实现
-	(1). 在src/components/文件夹下新建子组件.vue文件
+(1). 在src/components/文件夹下新建子组件.vue文件
 	在子组件.vue文件中编写这个子组件的内容
 	比如: src/components/Carousel.vue
 		<template>
 		<script>
 		<style>
 	完善Carousel.vue内容。
-	(2). 在父组件的<script>中用import引入子组件对象
+(2). 在父组件的<script>中用import引入子组件对象
 	<script>
 		import 组件名 from "子组件路径"
 	比如: import Carsouel from "../components/Carsouel "
-	(3). 在父组件的<script>中的export default 中
+(3). 在父组件的<script>中的export default 中
 		export default {
 			... ...
 			components:{
@@ -247,26 +242,26 @@
 			比如: Carsouel
 			}
 		}
-	(4). 结果: 在当前组件或页面内，就可用<carsouel></carsouel>来引入子组件
+(4). 结果: 在当前组件或页面内，就可用<carsouel></carsouel>来引入子组件
 6. 如果所有页面都需要的css代码写哪儿？App.vue中的<style>中
 
 
 7. 使用axios动态获取数据:
-	(1). 在用脚手架工具生成完项目源代码后，就要为项目添加axios模块(见脚手架安装和配置部分)
-	(2). 在当前组件的生命周期钩子函数中的created()函数内，或mounted()函数内都可发送axios请求。
-	(3). 在axios.get().then(res=>{})会调函数中，将服务器返回的数据(res.data)，分门别类的赋值给data中的变量
-	(4). 在页面/组件的<template>中，找到需要这些变量的位置，使用vue第一天讲的绑定语法，绑定数据到页面指定位置
+(1). 在用脚手架工具生成完项目源代码后，就要为项目添加axios模块(见脚手架安装和配置部分)
+(2). 在当前组件的生命周期钩子函数中的created()函数内，或mounted()函数内都可发送axios请求。
+(3). 在axios.get().then(res=>{})会调函数中，将服务器返回的数据(res.data)，分门别类的赋值给data中的变量
+(4). 在页面/组件的<template>中，找到需要这些变量的位置，使用vue第一天讲的绑定语法，绑定数据到页面指定位置
 ```
 三. 组件的生命周期:
 ```
-	(1). 生命周期: 一个组件的加载过程
-	(2). 回顾: 网页加载过程: 也有生命周期
+(1). 生命周期: 一个组件的加载过程
+(2). 回顾: 网页加载过程: 也有生命周期
 		先加载HTML和JS，当HTML和JS加载完成后，提前触发DOMContentLoaded事件，
 		所以，我们可以在DOMContentLoaded中编写发送ajax请求的代码。这样，只要页面加载到这个阶段，事件触发，就会自动向服务器发送请求。
 		然后，当所有网页内容加载完，还会触发一个事件: window.onload。凡是写在window.onload事件中的代码，都会在整个页面加载完自动触发执行。
-	(3). 问题：组件不是页面，无法触发页面的加载完成事件，但是，我们也想在组件加载完自动发送ajax请求！
-	(4). 解决: 其实组件加载过程，也有生命周期的阶段，每个阶段也能自动触发一个回调函数。但是因为这个回调函数不是网页标准的事件，所以这种特殊的回调函数，称为生命周期中的钩子函数
-	(5). 列举: Vue组件加载过程共分四个阶段，每个阶段前后，都会自动触发一个钩子函数。共8个钩子函数:
+(3). 问题：组件不是页面，无法触发页面的加载完成事件，但是，我们也想在组件加载完自动发送ajax请求！
+(4). 解决: 其实组件加载过程，也有生命周期的阶段，每个阶段也能自动触发一个回调函数。但是因为这个回调函数不是网页标准的事件，所以这种特殊的回调函数，称为生命周期中的钩子函数
+(5). 列举: Vue组件加载过程共分四个阶段，每个阶段前后，都会自动触发一个钩子函数。共8个钩子函数:
 		a.0  beforeCreate(){ ...axios.get()... }
 	a. 创建(create)阶段: 创建vue对象，并创建vue中的data对象
 		a.1  created(){ ...axios.get()... }

@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script src="js/vue.js"></script>
-  <!--子组件一定要在父组件之前引入！-->
-  <script src="2_todo-add.js">
-    //Vue.component("todo-add",{ ... })
-  </script>
-  <script src="2_todo-item.js">
-    //Vue.component("todo-item",{ ... })
-  </script>
-  <script src="2_todo-list.js">
-    //Vue.component("todo-list",{ ... })
-  </script>
-  <script src="2_todo.js">
-    //Vue.component("todo",{ ... })
-  </script>
-
-</head>
-<body>
-<div id="app">
-  <todo></todo>
-</div>
-<script>
-var bus= new Vue({});
-Vue.prototype.bus=bus;
-var vm=new Vue({
-  el:"#app",
-  data:{
-
-  }
-})
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <!--子组件一定要在父组件之前引入！-->
+    <script src="2_todo-add.js"></script>
+    <script src="2_todo-item.js"></script>
+    <script src="2_todo-list.js"></script>
+    <script src="2_todo.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <todo></todo>
+    </div>
+    <script>
+      //========================================================================
+      //该版本的todo实现是将待办项数组放在todo组件中。
+      //关键点：属性绑定传参、子定义事件及调用
+      //========================================================================
+      var vm = new Vue({
+        el: "#app",
+        data: {},
+      });
+    </script>
+  </body>
 </html>

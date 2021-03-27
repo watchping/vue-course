@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <todo></todo>
+    </div>
+    <script>
+      //========================================================================
+      //该版本的todo实现是将待办项数组放在todo组件中。
+      //关键点：属性绑定传参、ref、$refs、$parent
+      //========================================================================
+      //定义子组件
+      var todoAdd = {
+        template: `
+          <div>
+            <input type="text" v-model="task" ref="input"/>
+            <button @click="add">+</button>
+          </div>`,
+        data() {
+          return { task: "" };
+        },
+        methods: {
+          add() {
+            this.$parent.add(this.task); //调用父组件的add方法，并传参
+            this.task = "";
+          },
+        },
+        mounted() {
+          this.$refs.input.focus();
+        },
+      };
+
+      //定义子组件（其实是孙组件了）
+      var todoItem = {
+        template: `<li>
+          {{i+1}} - {{task}} <button @click="del">x</button>
+        </li>`,
+        props: ["task", "i"], //定义接受的参数
+        methods: {
+          del() {
+            this.$parent.$parent.del(this.i); //调用父组件的父组件的方法,并传参
+          },
+        },
+      };
+
+      //定义子组件
+      var todoList = {
+        template: `<ul>
+          <todo-item v-for="(task,i) of tasks" :task="task" :i="i" :key="i" ref="todoItem""></todo-item>
+        </ul>`,
+        props: ["tasks"],
+        components: {
+          todoItem,
+        },
+      };
+
+      //定义父组件，全局注册
+      Vue.component("todo", {
+        template: `<div>
+          <h1>待办事项列表</h1>
+          <todo-add ref="todoAdd"></todo-add>
+          <todo-list ref="todoList" :tasks="tasks"></todo-list>
+        </div>`,
+
+        data() {
+          return {
+            tasks: ["吃饭", "睡觉", "打亮亮", "学习"], //待办事项数组放在子组件todoList里
+          };
+        },
+
+        methods: {
+          del: function (i) {
+            this.tasks.splice(i, 1);
+          },
+          add(task) {
+            this.tasks.push(task);
+          },
+        },
+
+        components: {
+          todoAdd,
+          todoList,
+        },
+      });
+
+      var vm = new Vue({
+        el: "#app",
+        data: {},
+      });
+    </script>
+  </body>
+</html>

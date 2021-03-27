@@ -1,6 +1,5 @@
-//对象的变量名，必须使用驼峰命名
-//且，对象的变量名，将来会被自动翻译为子组件的标签名。
-var todoItem={//{}内保持组件的内容格式不变。
+//对象的变量名，必须使用驼峰命名，将来会被自动翻译为子组件的标签名。
+var todoItem={
   template:`<li>
     <!--从爹给的口袋里获得的数据，可在孩子里用于绑定语法中，就像用自己data中的数据一样方便-->
     {{i+1}} - {{task}} <button @click="del_item">x</button>
@@ -9,7 +8,7 @@ var todoItem={//{}内保持组件的内容格式不变。
   props:[ "task", "i" ],
   methods:{
     del_item(){
-      this.$emit("del_item", this.i);
+      this.$emit("del_item", this.i);//触发父组件中自定义的事件（实验表明父组件的父组件也可以）
     }
   }
 }
